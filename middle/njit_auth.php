@@ -25,12 +25,13 @@ curl_setopt ($ch, CURLOPT_POSTFIELDS, http_build_query(array(
 curl_setopt ($ch, CURLOPT_POST, 1); 
 $result = curl_exec ($ch); 
 
-//echo $result;
+//echo "<pre>" . $result . "</pre>";
 
-$pos = strpos($result, "loginok.html");
+$token_found = strpos($result, "welcome");
+
 
 //$auth_result = array();
-if ($pos === false)
+if (!$token_found)
 {
 	//$auth_result["isAuthenticated"] = false;
 	$auth_result = array("isAuthenticated" => false);
