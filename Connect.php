@@ -26,6 +26,6 @@
 	else{
 	header("location:index.php?error=inc1");
 	} */
-
+ /* Edited by Kishan Patel 2/16/14, this script will be used to connect/send data to middle end*/
 
 ?>
