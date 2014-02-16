@@ -20,11 +20,11 @@
 	        if(isset($_GET['error']) && $_GET['error'] == "inc1"){
 	         print ("Incorrect UCID or Password");
 	        }
-	    ?>
+	 ?>
 	    <!--<button id="sub">Submit</button>-->
     </form>
-    <span id="result" style="text-align:center"></span>
-    <span id="result" "text-align:center"></span>
+    <!--<span id="result" style="text-align:center"></span>
+    <span id="result" "text-align:center"></span> -->
 
 </div> <!-- End of normal UCID Authentication -->
 
@@ -44,8 +44,8 @@
 	    ?>
         <!--<button id="sub2">Submit</button>-->
     </form>
-    <span id="result" style="text-align:center"></span>
-    <span id="result" "text-align:center"></span>
+    <!-- <span id="result" style="text-align:center"></span>
+    <span id="result" "text-align:center"></span> -->
 </div> <!-- End of SQL Server Authentication -->
     
 <!--<script src="jquery-1.11.0.min.js" type="text/javascript"></script>
