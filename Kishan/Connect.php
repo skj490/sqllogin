@@ -1,5 +1,5 @@
 <?php
-//Code will send data to Njit_Auth.php for user authentication
+//Code will send post data to middle-end
 
 	
 	$Username =$_POST['username'];
@@ -17,15 +17,6 @@
 	
 	curl_close($crl);
 	return $result;
-	
-	$result = json_decode($result);
-	
-	if($result == "true"){
-	header("location: loginSucc.html");
-	}
-	else{
-	header("location:index.php?error=inc1");
-	}
 
 
 ?>
