@@ -6,7 +6,7 @@
 	$Password =$_POST['password'];
 	
 	$crl=curl_init();
-	curl_setopt($crl, CURLOPT_URL,"http://web.njit.edu/~krp56/njit_auth.php");
+	curl_setopt($crl, CURLOPT_URL,"http://web.njit.edu/~jeb26/cs490/login_system/njit_auth.php");
 	curl_setopt($crl, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($crl, CURLOPT_POSTFIELDS, "username=$Username&password=$Password");
