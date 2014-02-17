@@ -1,8 +1,8 @@
+<?php
 /* 	Back end login script. Validates against SQL database
 	sample username and password testname:testpass
 	written by Samuel Roberts
 */
-<?php
 	ini_set('display_errors',1); 
 	error_reporting(E_ALL);
 	session_start();
