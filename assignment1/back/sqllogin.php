@@ -1,4 +1,7 @@
 <?php
+	//Samuel Roberts Backend
+	//Cs490 Project
+	
 	ini_set('display_errors',1); 
 	error_reporting(E_ALL);
 	session_start();
