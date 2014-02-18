@@ -24,7 +24,7 @@ ini_set('display_errors',1);
 	}
 	else if ( $result["authNJIT"] )
 	{
-		header("location: njitSucc.html");
+		header("location: ucidSucc.html");
 	}
 	else 
 	{
