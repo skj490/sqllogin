@@ -20,7 +20,7 @@ ini_set('display_errors',1);
 	curl_close($crl);
 	if ( $result["authNJIT"] && $result["AuthLocal"] )
 	{
-		header("location: loginSucc.html");
+		header("location: loginUnSucc.html");
 	}
 	else if ( $result["authNJIT"] )
 	{
