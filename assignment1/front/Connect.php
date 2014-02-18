@@ -1,5 +1,6 @@
 <?php
 //Code will send post data to middle-end
+//Kishan Patel - Front end
 
 ini_set('display_errors',1); 
  error_reporting(E_ALL);
@@ -17,6 +18,7 @@ ini_set('display_errors',1);
 	$result = curl_exec($crl);
 	//check result
 	
+	//Using $result display correct html screen for user
 	curl_close($crl);
 	if ( $result["authNJIT"] && $result["AuthLocal"] )
 	{
