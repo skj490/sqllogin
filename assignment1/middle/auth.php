@@ -1,5 +1,6 @@
 <?php
-
+//James Bell Middle auth.php
+//CS490 Project
 //headers
 //header('Content-Type: application/json');
 
