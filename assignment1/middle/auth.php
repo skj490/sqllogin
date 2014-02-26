@@ -1,4 +1,5 @@
 <?php
+
 //James Bell Middle auth.php
 //CS490 Project
 //headers
@@ -13,7 +14,6 @@ $username = $data['username'];
 $password = $data['password'];
 //$username = $_POST['username'];
 //$password = $_POST['password'];
-
 $uu_id = "0xACA021";
 $url = "https://cp4.njit.edu/cp/home/login";
 //$postdata = "user=".$username."pass=".$password."uuid=".$uu_id;
@@ -38,7 +38,7 @@ curl_close($ch);
 
 $token_found = strpos($res, "welcome");
 
-$auth_result = array( "authNJIT" => "false", "AuthLocal" => "false");
+$auth_result = array( "authNJIT" => false, "AuthLocal" => false);
 
 if (!$token_found)
 {
@@ -54,22 +54,22 @@ $local_auth_result = array();
 function sql_login($user, $pass){
 	$ch = curl_init();	
 	//URL for Authentication by Sam in Back end	
+	
+	$data = array("username" => $user, "password" => $pass);                                                                    
+	$data_string = json_encode($data);  
+	
 	curl_setopt($ch, CURLOPT_URL, "http://afsaccess1.njit.edu/~ser5/sqllogin.php"); 
-		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array(
-	 	"uname" => $user,
-	 	"passwd" => $pass,
-	)));
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 	$result = curl_exec($ch);
 	curl_close($ch);
 	return $result;
 }
 
-
 $result = sql_login($username,$password);
 $result = json_decode($result);
-
-if($result == "true"){
+if($result){
 	//header("location: loginSucc.html");
 	$auth_result["AuthLocal"] = true;
 	echo json_encode($auth_result);
