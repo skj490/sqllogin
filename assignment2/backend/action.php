@@ -37,6 +37,54 @@ ini_set('display_errors',1);
 			$data = array( "action" => "listQues" );
 			$send = true;
 			break;	
+			
+		case "addExam":
+			$data = array("ename" => $_POST["ename"], "eduration" => $_POST["eduration"], "cdatetime" => $_POST["cdatetime"], "mpscore" => $_POST["mpscore"], 
+					"action" => "addExam");
+			$send = true;
+			break;
+		
+		case "delExam":
+			$data = array("examnum" => $_POST["examnum"], "action" => "delExam");
+			$send = true;
+			break;
+		
+		case "listExam":
+			$data = array( "action" => "listExam" );
+			$send = true;
+			break;	
+		
+		case "addEQues":
+			$data = array("eno" => $_POST["eno"], "qno" => $_POST["qno"], "uans" => $_POST["uans"], 
+					"action" => "addEQues");
+			$send = true;
+			break;
+		
+		case "delEQues":
+			$data = array("eno" => $_POST["eno"], "eline" => $_POST["eline"], "action" => "delEQues");
+			$send = true;
+			break;
+		
+		case "listEQues":
+			$data = array( "action" => "listEQues" );
+			$send = true;
+			break;	
+		
+		case "addUExam":
+			$data = array("eno" => $_POST["eno"], "uno" => $_POST["uno"], "tscore" => $_POST["tscore"], "stime" => $_POST["stime"],
+					"action" => "addUExam");
+			$send = true;
+			break;
+		
+		case "delUExam":
+			$data = array("eno" => $_POST["eno"], "uno" => $_POST["uno"], "action" => "delUExam");
+			$send = true;
+			break;
+		
+		case "listUExam":
+			$data = array( "action" => "listUExam" );
+			$send = true;
+			break;	
 	}
 	//var_dump$($_POST[action]);
 	var_dump($data);
