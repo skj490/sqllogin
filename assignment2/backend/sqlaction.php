@@ -135,6 +135,185 @@
 				}
 				echo json_encode($result);
 				break;
+			
+			case "addExam":
+				$check=mysqli_query($sql, "INSERT INTO `EXAMS` ( `ENO` , `ENAME`, `EDURATION`, `CDATETIME`, `MPSCORE`) 
+				VALUES( NULL, '".$data["ename"]."','".$data["eduration"]."','".$data["cdatetime"]."','".$data["mpscore"]."')");
+				
+				if ($check)
+				{
+					$result["result"] = true;
+					$result["message"] = "Exam successfully added.";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Exam failed to be added.";
+				}
+				echo json_encode($result);
+				break;
+				
+			case "delExam":
+				mysqli_query($sql, "DELETE FROM `EXAMS` WHERE `EXAMS`.`ENO`='".$data["examnum"]."'");
+				$numdel = mysqli_affected_rows($sql);
+				if ($numdel)
+				{
+					$result["result"] = true;
+					$result["message"] = "Exam successfully deleted.";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Exam failed to be deleted.";
+				}
+				echo json_encode($result);
+				break;
+				
+			case "listExam":
+				
+				$query=mysqli_query($sql, "
+					SELECT * 
+					FROM EXAMS
+				");
+				$rowtot = 0;
+				while($row=mysqli_fetch_assoc($query)){
+					$result[]=$row;
+					$rowtot++;
+				}
+				
+				if ( $rowtot > 0)
+				{
+					$result["result"] = true;
+					$result["message"] = "Query Successful";
+					$result["data"] = "Query Output";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Query Failed";
+				}
+				echo json_encode($result);
+				break;
+			
+			case "addEQues":
+				$check=mysqli_query($sql, "INSERT INTO `EXAMQ` ( `ENO` , `ELINE`, `QNO`, `UANS`) 
+				VALUES( '".$data["eno"]."', NULL, '".$data["qno"]."','".$data["uans"]."')");
+				
+				if ($check)
+				{
+					$result["result"] = true;
+					$result["message"] = "Exam-Question Relation successfully added.";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Exam-Question Relation failed to be added.";
+				}
+				echo json_encode($result);
+				break;
+				
+			case "delEQues":
+				mysqli_query($sql, "DELETE FROM `EXAMQ` WHERE `EXAMQ`.`ENO`='".$data["eno"]."'
+				AND `EXAMQ`.`ELINE`='".$data["eline"]."' ");
+				$numdel = mysqli_affected_rows($sql);
+				if ($numdel)
+				{
+					$result["result"] = true;
+					$result["message"] = "Exam-Question Relation successfully deleted.";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Exam-Question Relation failed to be deleted.";
+				}
+				echo json_encode($result);
+				break;
+				
+			case "listEQues":
+				
+				$query=mysqli_query($sql, "
+					SELECT * 
+					FROM EXAMQ
+				");
+				$rowtot = 0;
+				while($row=mysqli_fetch_assoc($query)){
+					$result[]=$row;
+					$rowtot++;
+				}
+				
+				if ( $rowtot > 0)
+				{
+					$result["result"] = true;
+					$result["message"] = "Query Successful";
+					$result["data"] = "Query Output";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Query Failed";
+				}
+				echo json_encode($result);
+				break;
+			
+			case "addUExam":
+				$check=mysqli_query($sql, "INSERT INTO `UEXAM` ( `UNO`, `ENO` , `TSCORE`, `STIME` ) 
+				VALUES( '".$data["uno"]."', '".$data["eno"]."', '".$data["tscore"]."','".$data["stime"]."')");
+				
+				if ($check)
+				{
+					$result["result"] = true;
+					$result["message"] = "User-Exam Relation successfully added.";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "User-Exam Relation failed to be added.";
+				}
+				echo json_encode($result);
+				break;
+				
+			case "delUExam":
+				mysqli_query($sql, "DELETE FROM `UEXAM` WHERE `UEXAM`.`ENO`='".$data["eno"]."'
+				AND `UEXAM`.`UNO`='".$data["uno"]."' ");
+				$numdel = mysqli_affected_rows($sql);
+				if ($numdel)
+				{
+					$result["result"] = true;
+					$result["message"] = "User-Exam Relation successfully deleted.";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "User-Exam Relation failed to be deleted.";
+				}
+				echo json_encode($result);
+				break;
+				
+			case "listUExam":
+				
+				$query=mysqli_query($sql, "
+					SELECT * 
+					FROM UEXAM
+				");
+				$rowtot = 0;
+				while($row=mysqli_fetch_assoc($query)){
+					$result[]=$row;
+					$rowtot++;
+				}
+				
+				if ( $rowtot > 0)
+				{
+					$result["result"] = true;
+					$result["message"] = "Query Successful";
+					$result["data"] = "Query Output";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Query Failed";
+				}
+				echo json_encode($result);
+				break;
 		}
 	}
 ?>
