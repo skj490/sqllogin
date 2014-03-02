@@ -219,8 +219,8 @@
 				break;
 			
 			case "addEQues":
-				$check=mysqli_query($sql, "INSERT INTO `EXAMQ` ( `ENO` , `ELINE`, `QNO`, `UANS`) 
-				VALUES( '".$data["eno"]."', NULL, '".$data["qno"]."','".$data["uans"]."')");
+				$check=mysqli_query($sql, "INSERT INTO `EXAMQ` ( `ENO` , `ELINE`, `QNO`) 
+				VALUES( '".$data["eno"]."', NULL, '".$data["qno"]."')");
 				
 				if ($check)
 				{
@@ -317,6 +317,67 @@
 				$query=mysqli_query($sql, "
 					SELECT * 
 					FROM UEXAM
+				");
+				$rowtot = 0;
+				while($row=mysqli_fetch_assoc($query)){
+					$result[]=$row;
+					$rowtot++;
+				}
+				
+				if ( $rowtot > 0)
+				{
+					$result["result"] = true;
+					$result["message"] = "Query Successful";
+					$result["data"] = "Query Output";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Query Failed";
+				}
+				echo json_encode($result);
+				break;
+			
+			case "addUEAns":
+				$check=mysqli_query($sql, "INSERT INTO `USEREANS` ( `UNO`, `ENO` , `ELINE`, `UANS` ) 
+				VALUES( '".$data["uno"]."', '".$data["eno"]."', '".$data["eline"]."','".$data["uans"]."')");
+				
+				if ($check)
+				{
+					$result["result"] = true;
+					$result["message"] = "User-Exam Answer successfully added.";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "User-Exam Answer failed to be added.";
+				}
+				echo json_encode($result);
+				break;
+				
+			case "delUEAns":
+				mysqli_query($sql, "DELETE FROM `USEREANS` WHERE `USEREANS`.`ENO`='".$data["eno"]."'
+				AND `USEREANS`.`UNO`='".$data["uno"]."' 
+				AND `USEREANS`.`ELINE`='".$data["eline"]."'");
+				$numdel = mysqli_affected_rows($sql);
+				if ($numdel)
+				{
+					$result["result"] = true;
+					$result["message"] = "User-Exam Answer successfully deleted.";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "User-Exam Answer failed to be deleted.";
+				}
+				echo json_encode($result);
+				break;
+				
+			case "listUEAns":
+				
+				$query=mysqli_query($sql, "
+					SELECT * 
+					FROM USEREANS
 				");
 				$rowtot = 0;
 				while($row=mysqli_fetch_assoc($query)){
