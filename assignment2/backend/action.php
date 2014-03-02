@@ -61,8 +61,7 @@ ini_set('display_errors',1);
 			break;	
 		
 		case "addEQues":
-			$data = array("eno" => $_POST["eno"], "qno" => $_POST["qno"], "uans" => $_POST["uans"], 
-					"action" => "addEQues");
+			$data = array("eno" => $_POST["eno"], "qno" => $_POST["qno"], "action" => "addEQues");
 			$send = true;
 			break;
 		
@@ -92,6 +91,21 @@ ini_set('display_errors',1);
 			$send = true;
 			break;
 		
+		case "addUEAns":
+			$data = array("eno" => $_POST["eno"], "uno" => $_POST["uno"], "eline" => $_POST["eline"], "uans" => $_POST["uans"],
+					"action" => "addUEAns");
+			$send = true;
+			break;
+		
+		case "delUEAns":
+			$data = array("eno" => $_POST["eno"], "uno" => $_POST["uno"], "eline" => $_POST["eline"], "action" => "delUEAns");
+			$send = true;
+			break;
+		
+		case "listUEAns":
+			$data = array( "action" => "listUEAns" );
+			$send = true;
+			break;
 
 	}
 	//var_dump$($_POST[action]);
