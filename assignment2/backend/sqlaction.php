@@ -17,6 +17,29 @@
 	{
 		mysqli_select_db($sql, "ser5");
 		switch ($data["action"]){
+			
+			case "login":
+				$check=mysqli_query($sql, "SELECT * FROM USER WHERE USERNAME='".$data["username"]."'");
+				$record=mysqli_fetch_array($check);
+				//echo "$check <br>";
+				if ($check && $data["password"] != "" && $data["password"]===$record['PASSWORD'])
+				{
+					$result["result"] = true;
+					$result["uno"] = $record['UNO'];
+					$result["username"] = $record['USERNAME'];
+					$result["password"] = $record['PASSWORD'];
+					$result["display"] = $record['DISPLAY'];
+					$result["ulevel"] = $record['ULEVEL'];
+					$result["message"] = "User successfully authenticated.";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "User failed to be authenticated.";
+				}
+				echo json_encode($result);
+				break;
+				
 			case "addUser":
 				$check=mysqli_query($sql, "INSERT INTO `USER` ( `UNO` , `USERNAME`, `PASSWORD`, `DISPLAY`, `ULEVEL`) 
 				VALUES( NULL, '".$data["username"]."','".$data["password"]."','".$data["displayn"]."','".$data["ulevel"]."')");
