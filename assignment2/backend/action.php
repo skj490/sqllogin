@@ -5,6 +5,12 @@ ini_set('display_errors',1);
  error_reporting(E_ALL);
 	switch ($_POST['action'])
 	{	
+		case "login":
+			$password = md5($_POST["password"]);
+			$data = array("username" => $_POST["username"], "password" => $password, "action" => "login");
+			$send = true;
+			break;
+		
 		case "addUser":
 			$password = md5($_POST["password"]);
 			$data = array("username" => $_POST["username"], "password" => $password, "displayn" => $_POST["displayn"], "ulevel" => $_POST["ulevel"], "action" => "addUser");
@@ -84,7 +90,9 @@ ini_set('display_errors',1);
 		case "listUExam":
 			$data = array( "action" => "listUExam" );
 			$send = true;
-			break;	
+			break;
+		
+
 	}
 	//var_dump$($_POST[action]);
 	var_dump($data);
