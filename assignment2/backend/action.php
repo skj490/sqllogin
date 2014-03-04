@@ -106,6 +106,11 @@ ini_set('display_errors',1);
 			$data = array( "action" => "listUEAns" );
 			$send = true;
 			break;
+			
+		case "listEUAns":
+			$data = array("eno" => $_POST["eno"], "uno" => $_POST["uno"], "action" => "listEUAns");
+			$send = true;
+			break;
 
 	}
 	//var_dump$($_POST[action]);
