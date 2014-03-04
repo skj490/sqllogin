@@ -398,6 +398,44 @@
 				}
 				echo json_encode($result);
 				break;
+			
+			case "listEUAns":
+				
+				$query=mysqli_query($sql, "
+					SELECT UEXAM.*, EXAMS.*, EXAMQ.*, QUESTIONS.*, USEREANS.*
+					FROM UEXAM
+						JOIN EXAMS
+							ON EXAMS.ENO = UEXAM.ENO
+						JOIN EXAMQ
+							ON EXAMQ.ENO = EXAMS.ENO
+						JOIN QUESTIONS
+							ON QUESTIONS.QNO = EXAMQ.QNO
+						JOIN USEREANS
+							ON USEREANS.UNO = UEXAM.UNO
+							AND USEREANS.ENO = UEXAM.UNO
+							AND USEREANS.ELINE = EXAMQ.ELINE
+					WHERE UEXAM.UNO='".$data["uno"]."'
+					AND UEXAM.ENO='".$data["eno"]."'
+				");
+				$rowtot = 0;
+				while($row=mysqli_fetch_assoc($query)){
+					$result[]=$row;
+					$rowtot++;
+				}
+				
+				if ( $rowtot > 0)
+				{
+					$result["result"] = true;
+					$result["message"] = "Query Successful";
+					$result["data"] = "Query Output";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Query Failed";
+				}
+				echo json_encode($result);
+				break;
 		}
 	}
 ?>
