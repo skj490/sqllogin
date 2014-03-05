@@ -1,0 +1,34 @@
+<!Doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; "charset="utf-8">
+<link rel="stylesheet" href="css/style.css">
+<title>NJIT Login Authentication</title> <!-- Title that shows up on tab-->
+
+</head>
+<body>
+<section class="container">
+<div class="login"> <!-- Start of normal UCID Authentication -->
+	<h1>Student Login</h1>
+    <form id='login' action='Connect.php' method='post' style="text-align: center">
+	    Username: <input type="text" name="username" placeholder="UserName" />
+	    Password: <input type="password" name="password" placeholder="Password" />
+        <br>
+        <label> Admin </label> <input type="radio" name="ulevel" value="1" />
+        <label> Teacher </label> <input type="radio" name="ulevel" value="2"/>
+        <label> Student</label><input type="radio" name="ulevel" value="3" /><br>
+        
+        
+        <br><input type="submit" name="login" value="submit" class="button">
+	    <!--<button id="sub">Submit</button>-->
+    </form>
+    </div>
+ <!-- End of normal UCID Authentication -->
+
+    
+<div class="about">
+	<!--New Jeresy Institute of Technology-->    
+    Login Form Created By: <br> Kishan Patel (Front End)<br /> James Bell (Middle End) <br /> Samuel Roberts (Back End) <br />
+    </div>
+</body>
+</html>
