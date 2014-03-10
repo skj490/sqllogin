@@ -436,6 +436,50 @@
 				}
 				echo json_encode($result);
 				break;
+			
+			case "addQues2":
+				$check=mysqli_query($sql, "INSERT INTO `QUESTIONS2` ( `QNO` , `SNAME`, `QDESC`, `OPT1`, `OPT2`, `OPT3`, `OPT4`, `QTYPE`, `QWORTH`, `ANSWER`, `NOTES` ) 
+				VALUES( NULL, '".$data["sname"]."','".$data["qdesc"]."','".$data["opt1"]."','".$data["opt2"]."','".$data["opt3"]."','".$data["opt4"]."','".$data["qtype"]."','".$data["qworth"]."',
+					   '".$data["answer"]."','".$data["notes"]."')");
+				
+				if ($check)
+				{
+					$result["result"] = true;
+					$result["message"] = "Question2 successfully added.";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Question2 failed to be added.";
+				}
+				echo json_encode($result);
+				break;
+				
+			case "listQues2":
+				
+				$query=mysqli_query($sql, "
+					SELECT * 
+					FROM QUESTIONS2 
+				");
+				$rowtot = 0;
+				while($row=mysqli_fetch_assoc($query)){
+					$result[]=$row;
+					$rowtot++;
+				}
+				
+				if ( $rowtot > 0)
+				{
+					$result["result"] = true;
+					$result["message"] = "Query Successful";
+					$result["data"] = "Query Output";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Query Failed";
+				}
+				echo json_encode($result);
+				break;
 		}
 	}
 ?>
