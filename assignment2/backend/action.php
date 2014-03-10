@@ -111,7 +111,20 @@ ini_set('display_errors',1);
 			$data = array("eno" => $_POST["eno"], "uno" => $_POST["uno"], "action" => "listEUAns");
 			$send = true;
 			break;
-
+		case "addQues2":
+			$data = array("sname" => $_POST["sname"], "qdesc" => $_POST["qdesc"], 
+					"opt1" => $_POST["opt1"], "opt2" => $_POST["opt2"], 
+					"opt3" => $_POST["opt3"], "opt4" => $_POST["opt4"], 
+					"qtype" => $_POST["qtype"], "qworth" => $_POST["qworth"], 
+					"answer" => $_POST["answer"], "notes" => $_POST["notes"],
+					"action" => "addQues2");
+			$send = true;
+			break;
+		
+		case "listQues2":
+			$data = array( "action" => "listQues2" );
+			$send = true;
+			break;	
 	}
 	//var_dump$($_POST[action]);
 	var_dump($data);
