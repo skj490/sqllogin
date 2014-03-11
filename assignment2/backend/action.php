@@ -124,7 +124,12 @@ ini_set('display_errors',1);
 		case "listQues2":
 			$data = array( "action" => "listQues2" );
 			$send = true;
-			break;	
+			break;
+		
+		case "listSEQues":
+			$data = array("eno" => $_POST["eno"], "uno" => $_POST["uno"], "action" => "listSEQues");
+			$send = true;
+			break;
 	}
 	//var_dump$($_POST[action]);
 	var_dump($data);
