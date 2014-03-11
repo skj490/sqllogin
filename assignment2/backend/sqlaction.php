@@ -1,4 +1,9 @@
 <?php
+	/* 	Back end database scripts. 
+	Validates against SQL database sample username and password testname:testpass
+	Various scripts to insert/delete and query the database tables.
+	written by Samuel Roberts
+	*/
 	$data = json_decode(file_get_contents('php://input'),true);
 	
 	session_start();
@@ -399,43 +404,6 @@
 				echo json_encode($result);
 				break;
 			
-			case "listEUAns":
-				
-				$query=mysqli_query($sql, "
-					SELECT UEXAM.*, EXAMS.*, EXAMQ.*, QUESTIONS.*, USEREANS.*
-					FROM UEXAM
-						JOIN EXAMS
-							ON EXAMS.ENO = UEXAM.ENO
-						JOIN EXAMQ
-							ON EXAMQ.ENO = EXAMS.ENO
-						JOIN QUESTIONS
-							ON QUESTIONS.QNO = EXAMQ.QNO
-						JOIN USEREANS
-							ON USEREANS.UNO = UEXAM.UNO
-							AND USEREANS.ENO = UEXAM.UNO
-							AND USEREANS.ELINE = EXAMQ.ELINE
-					WHERE UEXAM.UNO='".$data["uno"]."'
-					AND UEXAM.ENO='".$data["eno"]."'
-				");
-				$rowtot = 0;
-				while($row=mysqli_fetch_assoc($query)){
-					$result[]=$row;
-					$rowtot++;
-				}
-				
-				if ( $rowtot > 0)
-				{
-					$result["result"] = true;
-					$result["message"] = "Query Successful";
-					$result["data"] = "Query Output";
-				}
-				else
-				{
-					$result["result"] = false;
-					$result["message"] = "Query Failed";
-				}
-				echo json_encode($result);
-				break;
 			
 			case "addQues2":
 				$check=mysqli_query($sql, "INSERT INTO `QUESTIONS2` ( `QNO` , `SNAME`, `QDESC`, `OPT1`, `OPT2`, `OPT3`, `OPT4`, `QTYPE`, `QWORTH`, `ANSWER`, `NOTES` ) 
@@ -484,14 +452,52 @@
 			case "listSEQues":
 				
 				$query=mysqli_query($sql, "
-					SELECT UEXAM.UNO, EXAMS.ENO, EXAMQ.ELINE, QUESTIONS.*
+					SELECT UEXAM.UNO, EXAMS.ENO, EXAMQ.ELINE, QUESTIONS2.*
 					FROM UEXAM
 						JOIN EXAMS
 							ON EXAMS.ENO = UEXAM.ENO
 						JOIN EXAMQ
 							ON EXAMQ.ENO = EXAMS.ENO
-						JOIN QUESTIONS
-							ON QUESTIONS.QNO = EXAMQ.QNO
+						JOIN QUESTIONS2
+							ON QUESTIONS2.QNO = EXAMQ.QNO
+					WHERE UEXAM.UNO='".$data["uno"]."'
+					AND UEXAM.ENO='".$data["eno"]."'
+				");
+				$rowtot = 0;
+				while($row=mysqli_fetch_assoc($query)){
+					$result[]=$row;
+					$rowtot++;
+				}
+				
+				if ( $rowtot > 0)
+				{
+					$result["result"] = true;
+					$result["message"] = "Query Successful";
+					$result["data"] = "Query Output";
+				}
+				else
+				{
+					$result["result"] = false;
+					$result["message"] = "Query Failed";
+				}
+				echo json_encode($result);
+				break;
+				
+				case "listEUAns":
+				
+				$query=mysqli_query($sql, "
+					SELECT UEXAM.UNO, EXAMS.ENO, EXAMQ.ELINE, QUESTIONS2.*, USEREANS.UANS
+					FROM UEXAM
+						JOIN EXAMS
+							ON EXAMS.ENO = UEXAM.ENO
+						JOIN EXAMQ
+							ON EXAMQ.ENO = EXAMS.ENO
+						JOIN QUESTIONS2
+							ON QUESTIONS2.QNO = EXAMQ.QNO
+						JOIN USEREANS
+							ON USEREANS.UNO = UEXAM.UNO
+							AND USEREANS.ENO = UEXAM.ENO
+							AND USEREANS.ELINE = EXAMQ.ELINE
 					WHERE UEXAM.UNO='".$data["uno"]."'
 					AND UEXAM.ENO='".$data["eno"]."'
 				");
